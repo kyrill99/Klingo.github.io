@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>klingo — Voice AI Agent für Anrufe & Termine</title>
+
+  <!-- Social/SEO -->
+  <meta name="description" content="klingo beantwortet Anrufe nach 18 Uhr, klärt Fragen & bucht Termine. Für Handwerk, Praxen & Tierärzte in Zürich und der ganzen Schweiz." />
+  <meta property="og:title" content="klingo — Voice AI Agent" />
+  <meta property="og:description" content="Nie wieder verpasste Anrufe: Q&A + Terminbuchung, auch nach Feierabend." />
+  <meta property="og:url" content="https://klingo.ch" />
+  <meta property="og:image" content="https://klingo.ch/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Honor user light/dark preference -->
+  <meta name="color-scheme" content="light dark" />
+
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    /* === Base / Theme === */
+    :root {
+      --bg: #0b0c10;
+      --bg-soft: #0f1117;
+      --fg: #e8eef6;
+      --muted: #a8b3c7;
+      --brand: #7c5cff;  /* adjust brand color here */
+      --brand-2: #00d4ff;
+      --card: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.1);
+      --radius: 16px;
+
+      /* Fluid type & spacing (clamp: min, ideal, max) */
+      --step--1: clamp(0.88rem, 0.82rem + 0.2vw, 1.00rem);
+      --step-0:  clamp(1.00rem, 0.95rem + 0.3vw, 1.15rem);
+      --step-1:  clamp(1.25rem, 1.10rem + 0.8vw, 1.75rem);
+      --step-2:  clamp(1.75rem, 1.50rem + 1.2vw, 2.25rem);
+      --step-3:  clamp(2.25rem, 1.90rem + 2.2vw, 3.25rem);
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #ffffff;
+        --bg-soft: #f6f7fb;
+        --fg: #13151a;
+        --muted: #5a6475;
+        --card: rgba(0,0,0,0.04);
+        --border: rgba(0,0,0,0.08);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font: 400 var(--step-0)/1.55 system-ui, -apple-system, Segoe UI, Roboto, Inter, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--fg);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(124,92,255,.25), transparent 50%),
+        radial-gradient(900px 500px at 90% 0%, rgba(0,212,255,.20), transparent 60%),
+        linear-gradient(180deg, var(--bg-soft), var(--bg));
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, 92vw); margin-inline: auto; }
+
+    /* === Header === */
+    header {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: saturate(120%) blur(10px);
+      background: color-mix(in oklab, var(--bg) 86%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0;
+    }
+    .logo {
+      display: inline-flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .2px;
+    }
+    .logo-mark {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      display: grid; place-items: center; color: white; font-weight: 800; font-size: 14px;
+      box-shadow: 0 6px 18px rgba(124,92,255,.35), 0 2px 8px rgba(0,212,255,.25);
+    }
+    nav a {
+      margin: 0 10px; padding: 8px 10px; color: var(--muted);
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      border: 0; color: white; padding: 10px 16px; border-radius: 999px;
+      font-weight: 600; box-shadow: 0 10px 24px rgba(124,92,255,.25);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 14px 28px rgba(124,92,255,.33); }
+    .btn.outline {
+      background: transparent; color: var(--fg); border: 1px solid var(--border); box-shadow: none;
+    }
+
+    /* === Hero === */
+    .hero { padding: 64px 0 40px; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 24px; align-items: center; }
+    @media (max-width: 900px){ .hero-grid { grid-template-columns: 1fr; } }
+    h1 { font-size: var(--step-3); letter-spacing: -0.02em; margin: 0 0 12px; }
+    .lead { font-size: var(--step-1); color: var(--muted); margin: 0 0 24px; }
+
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 18px 16px;
+    }
+
+    /* === Features === */
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0 10px; }
+    @media (max-width: 900px){ .features { grid-template-columns: 1fr; } }
+    .feat h3 { margin: 8px 0 6px; font-size: 1.05rem; }
+    .tag { font-size: 12px; color: var(--muted); border: 1px solid var(--border); padding: 4px 8px; border-radius: 999px; }
+
+    /* === Sections === */
+    section { padding: 48px 0; }
+    .section-title { font-size: var(--step-2); margin: 0 0 8px; }
+    .section-sub { color: var(--muted); margin: 0 0 20px; }
+
+    /* === Pricing === */
+    .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media (max-width: 900px){ .pricing { grid-template-columns: 1fr; } }
+    .price h4 { margin: 0 0 4px; }
+    .price ul { margin: 10px 0 16px; padding-left: 18px; color: var(--muted); }
+    .nano { font-size: 12px; color: var(--muted); }
+
+    /* === Footer === */
+    footer { border-top: 1px solid var(--border); padding: 22px 0 40px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#top">
+        <span class="logo-mark">k</span>
+        <span>klingo</span>
+      </a>
+      <nav>
+        <a href="#features">Funktionen</a>
+        <a href="#how">So funktioniert’s</a>
+        <a href="#pricing">Preise</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
+      <a class="btn" href="https://calendly.com/YOUR_CALENDLY_15MIN" target="_blank" rel="noopener">15-Min Termin</a>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="tag">Für Handwerk • Praxen • Tierärzte</div>
+          <h1>Nie wieder verpasste Anrufe.<br/>klingo bucht Termine – auch nach 18&nbsp;Uhr.</h1>
+          <p class="lead">Der Voice-Agent, der innerhalb von 10&nbsp;Sekunden abnimmt, Fragen beantwortet und direkt in Ihren Kalender bucht. Deutsch • Schweizerdeutsch • Englisch.</p>
+          <div style="display:flex; gap:10px; flex-wrap: wrap;">
+            <a class="btn" href="https://calendly.com/YOUR_CALENDLY_15MIN" target="_blank" rel="noopener">Live-Demo buchen</a>
+            <a class="btn outline" href="https://wa.me/41XXXXXXXXX?text=Hoi%20klingo%2C%20ich%20m%C3%B6chte%20eine%20Demo" target="_blank" rel="noopener">WhatsApp anfragen</a>
+          </div>
+          <p class="nano" style="margin-top:10px;">Tipp: WhatsApp-Link mit Ihrer +41 Nummer ersetzen</p>
+        </div>
+
+        <!-- Right card (“How it sounds”) -->
+        <div class="card">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10a7 7 0 0 1 18 0v4a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-4Z" stroke="currentColor" stroke-width="1.5"/><path d="M8 17v.5a4 4 0 0 0 8 0V17" stroke="currentColor" stroke-width="1.5"/></svg>
+            <strong>So klingt’s</strong>
+          </div>
+          <audio controls preload="none" style="width:100%; border-radius: 10px;">
+            <source src="demo.mp3" type="audio/mpeg">
+            Ihr Browser unterstützt das Audio-Element nicht.
+          </audio>
+          <ul style="margin:12px 0 0; padding-left:18px; color:var(--muted);">
+            <li>Antwortet in &lt;10s</li>
+            <li>Fragen & FAQ klären</li>
+            <li>Direktbuchung & WhatsApp-Bestätigung</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Features quick row -->
+      <div id="features" class="features">
+        <div class="card feat">
+          <div class="tag">24/7</div>
+          <h3>Nach Feierabend erreichbar</h3>
+          <p style="color:var(--muted); margin:0;">Fängt Abend- & Wochenend-Anrufe ab und sichert Aufträge/Termine.</p>
+        </div>
+        <div class="card feat">
+          <div class="tag">Q&A + Buchung</div>
+          <h3>Antwortet & bucht</h3>
+          <p style="color:var(--muted); margin:0;">Gibt Preisspannen, klärt Vorbereitung/Versicherung und bucht direkt.</p>
+        </div>
+        <div class="card feat">
+          <div class="tag">WhatsApp</div>
+          <h3>Bestätigt per WhatsApp</h3>
+          <p style="color:var(--muted); margin:0;">Schickt Bestätigung & Wegbeschreibung—bevorzugter Kanal vieler Kund:innen.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how">
+      <h2 class="section-title">So funktioniert’s</h2>
+      <p class="section-sub">Einrichtung in 48h. Sie behalten Ihren Kalender & Ihre Nummer.</p>
+
+      <div class="features" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="card">
+          <strong>1. Setup</strong>
+          <p style="color:var(--muted);">Wir sammeln Öffnungszeiten, FAQ, Preise & Kalenderzugang.</p>
+        </div>
+        <div class="card">
+          <strong>2. Training</strong>
+          <p style="color:var(--muted);">klingo lernt Ihre Inhalte (RAG) & testet mit Probeanrufen.</p>
+        </div>
+        <div class="card">
+          <strong>3. Live</strong>
+          <p style="color:var(--muted);">Nach Feierabend aktiv: Anruf → Q&A → Termin + WhatsApp-Bestätigung.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+      <h2 class="section-title">Preise</h2>
+      <p class="section-sub">Starten Sie mit einem 14-Tage-Pilot. Wird beim Wechsel auf ein Abo angerechnet.</p>
+
+      <div class="pricing">
+        <div class="card price">
+          <h4>Pilot (14 Tage)</h4>
+          <div style="font-size:var(--step-1); font-weight:700;">CHF 299</div>
+          <ul>
+            <li>1 Nummer, 1 Workflow</li>
+            <li>Q&A & Direktbuchung</li>
+            <li>WhatsApp-Bestätigung</li>
+          </ul>
+          <a class="btn" href="https://buy.stripe.com/YOUR_PAYMENT_LINK" target="_blank" rel="noopener">Pilot starten</a>
+        </div>
+        <div class="card price">
+          <h4>Starter</h4>
+          <div style="font-size:var(--step-1); font-weight:700;">CHF 349 / Monat</div>
+          <ul>
+            <li>Solo-Betriebe</li>
+            <li>Basic Q&A & Buchung</li>
+            <li>E-Mail/WA-Reports</li>
+          </ul>
+          <a class="btn outline" href="https://calendly.com/YOUR_CALENDLY_15MIN" target="_blank" rel="noopener">Beratung</a>
+        </div>
+        <div class="card price">
+          <h4>Plus</h4>
+          <div style="font-size:var(--step-1); font-weight:700;">CHF 549 / Monat</div>
+          <ul>
+            <li>Mehrere Linien</li>
+            <li>Erweiterte Flows</li>
+            <li>Priorisierte Betreuung</li>
+          </ul>
+          <a class="btn outline" href="https://calendly.com/YOUR_CALENDLY_15MIN" target="_blank" rel="noopener">Beratung</a>
+        </div>
+      </div>
+      <p class="nano">Alle Preise exkl. MwSt. Minuten/AI-Nutzung nach Verbrauch.</p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2 class="section-title">Kontakt</h2>
+      <p class="section-sub">Fragen? Kurz anrufen oder WhatsApp schreiben.</p>
+      <div class="card" style="display:flex; gap:14px; flex-wrap:wrap; align-items:center;">
+        <a class="btn" href="tel:+41XXXXXXXXX">Anrufen</a>
+        <a class="btn outline" href="mailto:hello@klingo.ch">hello@klingo.ch</a>
+        <a class="btn outline" href="https://wa.me/41XXXXXXXXX?text=Hoi%20klingo%2C%20ich%20m%C3%B6chte%20eine%20Demo" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; gap:10px; flex-wrap: wrap;">
+      <div>© <span id="y"></span> klingo</div>
+      <div style="display:flex; gap:12px;">
+        <a href="/privacy.html">Datenschutz</a>
+        <a href="/impressum.html">Impressum</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // tiny helpers
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Smooth scroll for same-page links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if(id.length > 1){
+          e.preventDefault();
+          document.querySelector(id)?.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      });
+    });
+  </script>
+</body>
+</html>
