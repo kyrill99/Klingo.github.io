@@ -1,0 +1,112 @@
+/* === Base / Theme === */
+    :root {
+      --bg: #0b0c10;
+      --bg-soft: #0f1117;
+      --fg: #e8eef6;
+      --muted: #a8b3c7;
+      --brand: #7c5cff;  /* adjust brand color here */
+      --brand-2: #00d4ff;
+      --card: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.1);
+      --radius: 16px;
+
+      /* Fluid type & spacing (clamp: min, ideal, max) */
+      --step--1: clamp(0.88rem, 0.82rem + 0.2vw, 1.00rem);
+      --step-0:  clamp(1.00rem, 0.95rem + 0.3vw, 1.15rem);
+      --step-1:  clamp(1.25rem, 1.10rem + 0.8vw, 1.75rem);
+      --step-2:  clamp(1.75rem, 1.50rem + 1.2vw, 2.25rem);
+      --step-3:  clamp(2.25rem, 1.90rem + 2.2vw, 3.25rem);
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #ffffff;
+        --bg-soft: #f6f7fb;
+        --fg: #13151a;
+        --muted: #5a6475;
+        --card: rgba(0,0,0,0.04);
+        --border: rgba(0,0,0,0.08);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font: 400 var(--step-0)/1.55 system-ui, -apple-system, Segoe UI, Roboto, Inter, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--fg);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(124,92,255,.25), transparent 50%),
+        radial-gradient(900px 500px at 90% 0%, rgba(0,212,255,.20), transparent 60%),
+        linear-gradient(180deg, var(--bg-soft), var(--bg));
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, 92vw); margin-inline: auto; }
+
+    /* === Header === */
+    header {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: saturate(120%) blur(10px);
+      background: color-mix(in oklab, var(--bg) 86%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0;
+    }
+    .logo {
+      display: inline-flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .2px;
+    }
+    .logo-mark {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      display: grid; place-items: center; color: white; font-weight: 800; font-size: 14px;
+      box-shadow: 0 6px 18px rgba(124,92,255,.35), 0 2px 8px rgba(0,212,255,.25);
+    }
+    nav a {
+      margin: 0 10px; padding: 8px 10px; color: var(--muted);
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      border: 0; color: white; padding: 10px 16px; border-radius: 999px;
+      font-weight: 600; box-shadow: 0 10px 24px rgba(124,92,255,.25);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 14px 28px rgba(124,92,255,.33); }
+    .btn.outline {
+      background: transparent; color: var(--fg); border: 1px solid var(--border); box-shadow: none;
+    }
+
+    /* === Hero === */
+    .hero { padding: 64px 0 40px; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 24px; align-items: center; }
+    @media (max-width: 900px){ .hero-grid { grid-template-columns: 1fr; } }
+    h1 { font-size: var(--step-3); letter-spacing: -0.02em; margin: 0 0 12px; }
+    .lead { font-size: var(--step-1); color: var(--muted); margin: 0 0 24px; }
+
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 18px 16px;
+    }
+
+    /* === Features === */
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0 10px; }
+    @media (max-width: 900px){ .features { grid-template-columns: 1fr; } }
+    .feat h3 { margin: 8px 0 6px; font-size: 1.05rem; }
+    .tag { font-size: 12px; color: var(--muted); border: 1px solid var(--border); padding: 4px 8px; border-radius: 999px; }
+
+    /* === Sections === */
+    section { padding: 48px 0; }
+    .section-title { font-size: var(--step-2); margin: 0 0 8px; }
+    .section-sub { color: var(--muted); margin: 0 0 20px; }
+
+    /* === Pricing === */
+    .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media (max-width: 900px){ .pricing { grid-template-columns: 1fr; } }
+    .price h4 { margin: 0 0 4px; }
+    .price ul { margin: 10px 0 16px; padding-left: 18px; color: var(--muted); }
+    .nano { font-size: 12px; color: var(--muted); }
+
+    /* === Footer === */
+    footer { border-top: 1px solid var(--border); padding: 22px 0 40px; color: var(--muted); }
