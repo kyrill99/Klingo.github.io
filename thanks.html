@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Danke – klingo Warteliste</title>
+  <meta name="description" content="Danke für Ihre Registrierung auf der klingo‑Warteliste. So geht es jetzt weiter."/>
+  <link rel="icon" href="/favicon.png" type="image/png"/>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .wrap { max-width: 760px; margin: 0 auto; padding: 32px 20px; }
+    .card { border: 1px solid var(--border, #e5e7eb); border-radius: 16px; padding: 24px; background: var(--card, #ffffff0a); }
+    .next { display: grid; gap: 10px; margin: 16px 0 0; padding-left: 20px; }
+    .muted { color: var(--muted, #6b7280); }
+    .btnrow { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px; border: 1px solid var(--border, #e5e7eb); border-radius: 999px; text-decoration: none; }
+    .small { font-size: .9rem; }
+    header, footer { padding: 12px 0; }
+    .logo { display: inline-flex; gap: 8px; align-items: center; text-decoration: none; font-weight: 700; }
+    .tag { display:inline-block; padding: 4px 10px; border:1px solid var(--border, #e5e7eb); border-radius:999px; font-size:.85rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="logo" href="/#top"><span class="tag">k</span><span>klingo</span></a>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="card">
+        <h1>Danke – Sie stehen auf der Warteliste ✅</h1>
+        <p class="lead">Wir melden uns, sobald weitere Informationen verfügbar sind. Bis dahin: zwei kleine Schritte, damit nichts verloren geht.</p>
+        <ol class="next">
+          <li><strong>Mailbestätigung</strong> Sie kriegen bald eine Bestätigungsemail</li>
+          <li><strong>Optional: 30‑Sekunden‑Fragebogen.</strong> Helfen Sie uns zu priorisieren, was für Ihr Unternehmen am wichtigsten ist.</li>
+        </ol>
+
+        <div class="btnrow">
+          <a class="btn" href="/#top">Zur Startseite</a>
+          <!-- <a class="btn" href="https://cal.com/" target="_blank" rel="noopener">Interview anfragen</a>
+          <a class="btn" href="https://example.com/survey" target="_blank" rel="noopener">Kurzfragebogen</a> -->
+        </div>
+
+        <!-- <p class="small muted" style="margin-top:16px;">Tipp: Fügen Sie <strong>hello@klingo.ai</strong> zu Ihren Kontakten hinzu, damit unsere E‑Mails sicher ankommen.</p> -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap muted small">© <span id="y"></span> klingo</div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    // Optional analytics event for pageview/thank_you
+    try { window.dataLayer = window.dataLayer || []; dataLayer.push({event: 'waitlist_thanks_view'}); } catch(e) {}
+  </script>
+</body>
+</html>

@@ -41,15 +41,15 @@
           <h1>Warteliste für klingo</h1>
           <p class="lead">Seien Sie unter den Ersten: Wir starten gestaffelt mit ausgewählten KMU-Partnern. Eintragung dauert <strong>30 Sekunden</strong>.</p>
           <ul class="muted" style="margin:12px 0 24px; padding-left:18px;">
-            <li>Früher Zugang + Onboarding-Support</li>
-            <li>Option auf Pilot mit rabattierter Nutzung</li>
-            <li>Mitspracherecht bei Funktionen</li>
+            <li>Early Access & Rabatte</li>
+            <li>Feedback & Einfluss auf Funktionen beim Start</li>
+            <li>Neuesten Infos zum Release</li>
           </ul>
         </div>
 
         <div class="card">
           <!-- Replace action with your Formspree endpoint -->
-          <form class="waitlist" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <form class="waitlist" action="https://formspree.io/f/xjkjklaz" method="POST">
             <div class="field">
               <label for="name">Ihr Name*</label>
               <input id="name" name="name" type="text" required autocomplete="name" />
@@ -81,15 +81,15 @@
             </div>
 
             <div class="field">
-              <label for="notes">Was ist Ihnen am wichtigsten? (optional)</label>
-              <textarea id="notes" name="notes" rows="3" placeholder="z.B. nach 18 Uhr abnehmen, WhatsApp-Bestätigung, direkt buchen …"></textarea>
+              <label for="notes">Was ist Ihnen am wichtigsten oder würden Sie sich wünschen? (optional)</label>
+              <textarea id="notes" name="notes" rows="3" placeholder="z.B. nach 18 Uhr abnehmen, WhatsApp-Bestätigung, direkt buchen, Fragen beantworten, weitere Workflows…"></textarea>
             </div>
 
             <!-- consent -->
             <label class="muted" style="display:flex; gap:8px; align-items:flex-start;">
               <input type="checkbox" name="consent" required style="margin-top:4px;">
-              <span>Ich bin einverstanden, dass meine Angaben zur Kontaktaufnahme und Information über den klingo-Start verarbeitet werden.
-                Hinweise in der <a href="/privacy.html" class="muted" target="_blank" rel="noopener">Datenschutzerklärung</a>.
+              <span>Ich bin einverstanden, dass meine Angaben nur zur Kontaktaufnahme und für Information über den Start von Klingo verarbeitet/verwendet werden.
+                <!-- Hinweise in der <a href="/privacy.html" class="muted" target="_blank" rel="noopener">Datenschutzerklärung</a>. -->
               </span>
             </label>
 
@@ -98,8 +98,9 @@
             <!-- redirect after success (optional) -->
             <input type="hidden" name="_next" value="/waitlist.html?success=1"/>
 
-            <button class="btn" type="submit">Eintragen</button>
-            <p class="nano">Wir nutzen Double-Opt-In. Bitte bestätigen Sie die E-Mail nach der Anmeldung.</p>
+           
+              <button class="btn" type="submit">Eintragen</button>
+            <!-- <p class="nano">Wir nutzen Double-Opt-In. Bitte bestätigen Sie die E-Mail nach der Anmeldung.</p> -->
           </form>
 
           <div id="ok" class="success" style="display:none;">
@@ -114,7 +115,7 @@
     <div class="container" style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;">
       <div>© <span id="y"></span> klingo</div>
       <div style="display:flex; gap:12px;">
-        <a href="/privacy.html">Datenschutz</a>
+        <!-- <a href="/privacy.html">Datenschutz</a> -->
         <!-- <a href="/impressum.html">Impressum</a> -->
       </div>
     </div>
