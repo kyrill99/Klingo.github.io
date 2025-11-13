@@ -121,7 +121,7 @@
   .card { padding: 16px 14px; border-radius: 14px; }
 
   /* Ensure media fits the screen */
-  img, video, audio { max-width: 100%; height: auto; }
+  img, video { max-width: 100%; height: auto; }
 
   /* Bigger, finger-friendly buttons (≈48px tap targets) */
   .btn { padding: 14px 18px; min-height: 48px; }   /* ~9mm target */
@@ -133,7 +133,6 @@
 
 /* Helpful defaults across sizes */
 img { display: block; max-width: 100%; height: auto; }
-audio { width: 100%; }
 
 /* If any fixed widths sneak in, let them shrink on small screens */
 [class*="grid"] > * { min-width: 0; }
