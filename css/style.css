@@ -110,3 +110,30 @@
 
     /* === Footer === */
     footer { border-top: 1px solid var(--border); padding: 22px 0 40px; color: var(--muted); }
+
+    /* --- Mobile polish (≤600px) --- */
+@media (max-width: 600px){
+  .container { width: 94vw; }
+  header .nav { padding: 10px 0; }
+  nav a { padding: 10px 6px; margin: 0 4px; }      /* tighter nav text */
+
+  .hero { padding: 40px 0 28px; }
+  .card { padding: 16px 14px; border-radius: 14px; }
+
+  /* Ensure media fits the screen */
+  img, video, audio { max-width: 100%; height: auto; }
+
+  /* Bigger, finger-friendly buttons (≈48px tap targets) */
+  .btn { padding: 14px 18px; min-height: 48px; }   /* ~9mm target */
+
+  /* Vertical stacks with comfy gaps */
+  .features { gap: 12px; }
+  .pricing { gap: 12px; }
+}
+
+/* Helpful defaults across sizes */
+img { display: block; max-width: 100%; height: auto; }
+audio { width: 100%; }
+
+/* If any fixed widths sneak in, let them shrink on small screens */
+[class*="grid"] > * { min-width: 0; }
