@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Warteliste — klingo</title>
+  <meta name="description" content="Tragen Sie sich in die Warteliste ein, um klingo als Erste zu testen."/>
+  <link rel="icon" href="/favicon.png" type="image/png"/>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* minimal form polish reusing your theme */
+    form.waitlist { display:grid; gap:12px; max-width:560px; }
+    .field { display:grid; gap:6px; }
+    .field label { font-weight:600; }
+    .field input, .field select, .field textarea {
+      padding: 10px 12px; border:1px solid var(--border); border-radius:12px; background:transparent; color:var(--fg);
+    }
+    .muted { color: var(--muted); font-size: 0.95rem; }
+    .success { background: var(--card); border:1px solid var(--border); padding:14px; border-radius: var(--radius); margin-top:16px;}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="/#top"><span class="logo-mark">k</span><span>klingo</span></a>
+      <nav>
+        <a href="/#features">Funktionen</a>
+        <a href="/#how">So funktioniert’s</a>
+        <a href="/#pricing">Preise</a>
+        <a href="/#contact">Kontakt</a>
+      </nav>
+      <a class="btn" href="/waitlist.html">Warteliste</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="tag">Pre-Launch</div>
+          <h1>Warteliste für klingo</h1>
+          <p class="lead">Seien Sie unter den Ersten: Wir starten gestaffelt mit ausgewählten KMU-Partnern. Eintragung dauert <strong>30 Sekunden</strong>.</p>
+          <ul class="muted" style="margin:12px 0 24px; padding-left:18px;">
+            <li>Früher Zugang + Onboarding-Support</li>
+            <li>Option auf Pilot mit rabattierter Nutzung</li>
+            <li>Mitspracherecht bei Funktionen</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <!-- Replace action with your Formspree endpoint -->
+          <form class="waitlist" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div class="field">
+              <label for="name">Ihr Name*</label>
+              <input id="name" name="name" type="text" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="company">Firma*</label>
+              <input id="company" name="company" type="text" required autocomplete="organization" />
+            </div>
+            <div class="field">
+              <label for="email">Geschäfts-E-Mail*</label>
+              <input id="email" name="email" type="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="phone">Telefon (optional)</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" />
+            </div>
+
+            <!-- simple segmentation for research -->
+            <div class="field">
+              <label for="vertical">Branche</label>
+              <select id="vertical" name="vertical">
+                <option value="">Bitte wählen…</option>
+                <option>Beauty & Hair</option>
+                <option>Fahrschule</option>
+                <option>Health & Wellness</option>
+                <option>Home Services</option>
+                <option>Andere</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="notes">Was ist Ihnen am wichtigsten? (optional)</label>
+              <textarea id="notes" name="notes" rows="3" placeholder="z.B. nach 18 Uhr abnehmen, WhatsApp-Bestätigung, direkt buchen …"></textarea>
+            </div>
+
+            <!-- consent -->
+            <label class="muted" style="display:flex; gap:8px; align-items:flex-start;">
+              <input type="checkbox" name="consent" required style="margin-top:4px;">
+              <span>Ich bin einverstanden, dass meine Angaben zur Kontaktaufnahme und Information über den klingo-Start verarbeitet werden.
+                Hinweise in der <a href="/privacy.html" class="muted" target="_blank" rel="noopener">Datenschutzerklärung</a>.
+              </span>
+            </label>
+
+            <!-- spam honeypot -->
+            <input type="text" name="_gotcha" style="display:none">
+            <!-- redirect after success (optional) -->
+            <input type="hidden" name="_next" value="/waitlist.html?success=1"/>
+
+            <button class="btn" type="submit">Eintragen</button>
+            <p class="nano">Wir nutzen Double-Opt-In. Bitte bestätigen Sie die E-Mail nach der Anmeldung.</p>
+          </form>
+
+          <div id="ok" class="success" style="display:none;">
+            ✅ Danke! Bitte prüfen Sie Ihre E-Mails und bestätigen Sie die Anmeldung.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+      <div>© <span id="y"></span> klingo</div>
+      <div style="display:flex; gap:12px;">
+        <a href="/privacy.html">Datenschutz</a>
+        <!-- <a href="/impressum.html">Impressum</a> -->
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    // show success state if redirected with ?success=1
+    if (new URLSearchParams(location.search).get('success') === '1') {
+      document.getElementById('ok').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
