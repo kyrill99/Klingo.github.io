@@ -35,10 +35,7 @@
       margin: 0;
       font: 400 var(--step-0)/1.55 system-ui, -apple-system, Segoe UI, Roboto, Inter, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
       color: var(--fg);
-      background:
-        radial-gradient(1200px 600px at 10% -10%, rgba(124,92,255,.25), transparent 50%),
-        radial-gradient(900px 500px at 90% 0%, rgba(0,212,255,.20), transparent 60%),
-        linear-gradient(180deg, var(--bg-soft), var(--bg));
+      background: var(--bg);
     }
     a { color: inherit; text-decoration: none; }
     .container { width: min(1120px, 92vw); margin-inline: auto; }
@@ -97,7 +94,24 @@
     .tag { font-size: 12px; color: var(--muted); border: 1px solid var(--border); padding: 4px 8px; border-radius: 999px; }
 
     /* === Sections === */
-    section { padding: 48px 0; }
+    section { padding: 48px 0; position: relative; z-index: 1; }
+    .section-bleed { --section-bg: transparent; }
+    .section-bleed::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 100vw;
+      transform: translateX(-50%);
+      background: var(--section-bg);
+      z-index: -1;
+      pointer-events: none;
+    }
+    .hero.section-bleed { --section-bg: linear-gradient(180deg, rgba(124,92,255,.25) 0%, rgba(0,212,255,.12) 65%, transparent 100%); }
+    #how.section-bleed { --section-bg: linear-gradient(180deg, rgba(0,212,255,.1) 0%, transparent 85%); }
+    #pricing.section-bleed { --section-bg: linear-gradient(180deg,rgba(124, 92, 255, 0.25) 0%, rgba(0, 212, 255, 0.12) 60%, transparent 100%);}
+    #contact.section-bleed { --section-bg: linear-gradient(180deg, rgba(124,92,255,.12) 0%, transparent 90%); }
     .section-title { font-size: var(--step-2); margin: 0 0 8px; }
     .section-sub { color: var(--muted); margin: 0 0 20px; }
 
@@ -112,3 +126,22 @@
     footer { border-top: 1px solid var(--border); padding: 22px 0 40px; color: var(--muted); }
 
     /* --- Mobile polish (≤600px) --- */
+    @media (max-width: 600px) {
+      .nav { flex-direction: column; align-items: stretch; gap: 10px; padding: 12px 0 18px; }
+      header nav { display: flex; flex-wrap: wrap; gap: 8px; }
+      header nav a {
+        flex: 1 1 calc(50% - 8px);
+        text-align: center;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        color: var(--fg);
+      }
+      header .btn { width: 100%; justify-content: center; }
+
+      .hero { padding: 40px 0 24px; }
+      section { padding: 32px 0; }
+      .hero-grid { gap: 18px; }
+      .card { padding: 16px; }
+      .features,
+      .pricing { gap: 12px; }
+    }
