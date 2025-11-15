@@ -106,7 +106,7 @@
       transform: translateX(-50%);
       background: var(--section-bg);
       z-index: -1;
-      pointer-events: none;
+      pointer-events: none;     
     }
     .hero.section-bleed { --section-bg: linear-gradient(180deg, rgba(124,92,255,.25) 0%, rgba(0,212,255,.12) 65%, transparent 100%); }
     #how.section-bleed { --section-bg: linear-gradient(180deg, rgba(0,212,255,.1) 0%, transparent 85%); }
@@ -128,6 +128,7 @@
     /* --- Mobile polish (≤600px) --- */
     @media (max-width: 600px) {
       .nav { flex-direction: column; align-items: stretch; gap: 10px; padding: 12px 0 18px; }
+      .section-bleed { overflow: hidden; }
       header nav { display: flex; flex-wrap: wrap; gap: 8px; }
       header nav a {
         flex: 1 1 calc(50% - 8px);
